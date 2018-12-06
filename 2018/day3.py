@@ -15,6 +15,7 @@ for line in data:
     x, y = int(x), int(y[:-1])
     w, h = words[3].split('x')
     w, h = int(w), int(h)
+    doesnt_overlap = True
     for dx in range(w):  # go through all points of box
         for dy in range(h):
             C[(x + dx, y + dy)] += 1  # if any point is overlaps with another add 1
@@ -26,3 +27,18 @@ for value in C.values():
 
 print(f'Part 1 result: {overlapped_squares}')
 
+for line in data:
+    words = line.split()
+    id = words[0]
+    x, y = words[2].split(',')
+    x, y = int(x), int(y[:-1])
+    w, h = words[3].split('x')
+    w, h = int(w), int(h)
+    doesnt_overlap = True
+    for dx in range(w):
+        for dy in range(h):
+            if C[(x + dx, y + dy)] != 1:
+                doesnt_overlap = False
+
+    if doesnt_overlap:
+        print(f'Part 2 result: {id[1:]}')
