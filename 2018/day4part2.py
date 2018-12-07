@@ -1,4 +1,4 @@
-# https://adventofcode.com/2018/day/4
+# https://adventofcode.com/2018/day/4#part2
 
 from utils import get_input
 
