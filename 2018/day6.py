@@ -16,34 +16,22 @@ def get_coordinates(data):
 def manhattan_distance(point1, point2):
     x1, x2 = point1[0], point2[0]
     y1, y2 = point1[1], point2[1]
-    # print(abs(x2 - x1) + abs(y2 - y1))
     return abs(x2 - x1) + abs(y2 - y1)
 
 
 def closest(x, y):
-    # print(f'x:{x}, y:{y}')
     best = points_coord[0]
     tie = False
     for point in points_coord:
-        # print(f'Point: {point}')
         if manhattan_distance(point, (x, y)) < manhattan_distance(best, (x, y)):
             best = point
             tie = False
         elif manhattan_distance(point, (x, y)) == manhattan_distance(best, (x, y)):
             tie = True
-            # print(f'best: {best}')
     if tie:
         return (-1, -1)
     else:
         return best
-
-
-points_coord = get_coordinates(data)
-
-min_x = min(points_coord, key=lambda x: x[0])[0]
-max_x = max(points_coord, key=lambda x: x[0])[0]
-min_y = min(points_coord, key=lambda x: x[1])[1]
-max_y = max(points_coord, key=lambda x: x[1])[1]
 
 
 def score_around(W=0):
@@ -54,8 +42,15 @@ def score_around(W=0):
     return score
 
 
+points_coord = get_coordinates(data)
+
+min_x = min(points_coord, key=lambda x: x[0])[0]
+max_x = max(points_coord, key=lambda x: x[0])[0]
+min_y = min(points_coord, key=lambda x: x[1])[1]
+max_y = max(points_coord, key=lambda x: x[1])[1]
+
 score = score_around()
-score2 = score_around(10)
+score2 = score_around(1)
 
 result = [(score[k] if score[k] == score2[k] else 0, k) for k in score.keys()]
 print(max(result, key=lambda x: x[0])[0])
